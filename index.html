@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pagina Principal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+        <h1 class="site-title"></h1>
+
+        <div class="header-actions" style="display:flex;align-items:center;gap:12px">
+          <div class="search-box" style="display:flex;align-items:center;gap:8px">
+            <input id="search-input" type="search" placeholder="Buscar productos..." aria-label="Buscar productos" style="padding:8px 10px;border-radius:10px;border:1px solid #e6e6e9;min-width:220px">
+            <button id="search-btn" class="btn ghost" type="button">🔍</button>
+          </div>
+          <button id="open-cart-btn" class="cart-btn" aria-haspopup="dialog" aria-controls="cart-modal">
+            🛒 <span id="cart-count">0</span>
+          </button>
+        </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Pantalla inicial de categorías -->
+    <section id="category-screen" class="category-grid">
+      <article class="category-card">
+        <div class="cat-image">
+          <img src="assets/electrodomesticos.png" alt="Electrodomésticos">
+        </div>
+        <h2>Electrodomésticos</h2>
+        <button class="btn primary category-btn" data-category="electrodomesticos">Ver productos</button>
+      </article>
+
+    
+
+    </section>
+
+    <!-- Subcategorías (solo para electrodomésticos) -->
+    <section id="subcategory-screen" class="category-grid" style="display:none;">
+      <!-- Se genera por JS -->
+    </section>
+
+    <button id="back-to-categories-btn" class="btn ghost" style="display:none;margin-bottom:16px;">
+      VOLVER
+    </button>
+
+    <section id="catalog" class="catalog-grid" aria-live="polite">
+      <!-- Productos se inyectan por JS -->
+    </section>
+  </main>
+
+  <!-- Product Modal -->
+  <div id="product-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-backdrop" data-close="true"></div>
+    <div class="modal-panel" role="document" aria-labelledby="product-title">
+      <button class="modal-close" id="product-close-btn" aria-label="Cerrar producto">✕</button>
+      <div class="product-detail">
+        <div class="product-images">
+          <button class="img-nav left" id="img-prev" aria-label="Imagen anterior">‹</button>
+          <div class="img-viewer" id="img-viewer">
+            <!-- imagen grande -->
+          </div>
+          <button class="img-nav right" id="img-next" aria-label="Siguiente imagen">›</button>
+        </div>
+        <div class="product-info">
+          <h2 id="product-title"></h2>
+          <p class="price" id="product-price"></p>
+          <p class="short" id="product-short"></p>
+          <div class="specs" id="product-specs"></div>
+          <div class="long-desc" id="product-long"></div>
+
+          <label for="product-qty">Cantidad</label>
+          <input type="number" id="product-qty" min="1" value="1" />
+
+          <div class="detail-actions">
+            <button id="detail-add-btn" class="btn primary">Agregar al carrito</button>
+            <button id="detail-close-btn" class="btn ghost">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Modal / Panel -->
+  <div id="cart-modal" class="modal right" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-backdrop" data-close="true"></div>
+    <aside class="modal-panel cart-panel" role="document" aria-labelledby="cart-title">
+      <button class="modal-close" id="cart-close-btn" aria-label="Cerrar carrito">✕</button>
+      <h2 id="cart-title">Tu pedido</h2>
+
+      <div id="cart-items" class="cart-items">
+        <!-- Items in cart -->
+      </div>
+
+      <div class="cart-summary">
+        <label for="order-note">Nota (opcional)</label>
+        <textarea id="order-note" rows="3" placeholder=""></textarea>
+
+        <div class="totals">
+          <div><span>Subtotal</span><b id="subtotal">$0</b></div>
+          <div><span>Impuestos (opcional)</span><b id="taxes">$0</b></div>
+          <div class="total-row"><span>Total</span><b id="cart-total">$0</b></div>
+        </div>
+
+        <div class="cart-actions">
+          <button class="btn danger" id="clear-cart-btn">Vaciar carrito</button>
+          <button class="btn primary" id="send-whatsapp-btn">Enviar pedido por WhatsApp</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+  </footer>
+
+  <!-- SheetJS to parse Excel files in-browser -->
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
