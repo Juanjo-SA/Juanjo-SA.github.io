@@ -18,7 +18,7 @@ function formatMoney(num){
 async function loadProducts(){
   // Prefer loading from an Excel file (products.xlsx) if available.
   try{
-    const xlsxRes = await fetch('products.xlsx');
+    const xlsxRes = await fetch(`products.xlsx?_=${Date.now()}`, { cache: 'no-store' });
     if(xlsxRes && xlsxRes.ok){
       const ab = await xlsxRes.arrayBuffer();
       // SheetJS (XLSX) must be available on the page (added via CDN in index.html)
@@ -62,7 +62,7 @@ async function loadProducts(){
 
   // Fallback: intentar cargar products.json
   try{
-    const res = await fetch(PRODUCTS_JSON);
+    const res = await fetch(`${PRODUCTS_JSON}?_=${Date.now()}`, { cache: 'no-store' });
     products = await res.json();
     renderCatalog();
     checkHashOnLoad();
